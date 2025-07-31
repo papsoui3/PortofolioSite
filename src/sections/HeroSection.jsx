@@ -27,7 +27,7 @@ const HeroSection = () => {
     "Alexandros Papageorgiou",
     "Full Stack Developer",
     "Software Engineer",
-    "ML Specialist",
+    "Web Developer",
   ];
 
   // Tech icons configuration
