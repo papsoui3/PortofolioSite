@@ -92,6 +92,7 @@ const ProcessSection = () => {
           marginBottom: '4rem',
         }}>
          <h2 style={{
+          marginTop: '6rem',
             fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
             fontWeight: '700',
             marginBottom: '1rem',
@@ -263,7 +264,7 @@ const ProcessSection = () => {
           marginTop: '3rem',
           width: '100%',
         }}>
-          <Link
+          {/* <Link
             to="contact"
             smooth={true}
             duration={700}
@@ -296,7 +297,7 @@ const ProcessSection = () => {
             >
               Start Your Project <FaPaperPlane style={{ marginLeft: '8px' }} />
             </button>
-          </Link>
+          </Link> */}
         </div>
       </div>
 

@@ -2,82 +2,74 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaGithub, FaGlobe, FaLayerGroup, FaCode, FaRobot, FaMobileAlt, FaDesktop, FaGamepad, FaMicrochip, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 const ProjectsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+
   const scrollContainerRef = useRef(null);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/projects`);
-        const projectsData = Array.isArray(response.data.data) ? response.data.data : [];
-        
-        const processedProjects = projectsData.map(project => ({
-          ...project,
-          image: project.image ? {
-            url: project.image.url || `/api/projects/${project._id}/image`,
-            contentType: project.image.contentType,
-            size: project.image.size,
-            data: project.image.data 
-          } : null
-        }));
-        
-        setProjects(processedProjects);
-        setLoading(false);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message || 'Failed to fetch projects');
-        setLoading(false);
-        console.error('Fetch error:', err);
-      }
-    };
-
-    fetchProjects();
-
-    const handleScroll = () => {
-      const element = document.getElementById('projects');
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.75) {
-          setIsVisible(true);
+    const [projects] = useState([
+      {
+        _id: '1',
+        title: 'Portfolio Website',
+        description: 'A personal website to showcase my portfolio and skills.',
+        category: 'web',
+        github: 'https://github.com/yourusername/portfolio',
+        live: 'https://yourdomain.com',
+        tags: ['React', 'TailwindCSS', 'Framer Motion'],
+        image: {
+          url: 'https://via.placeholder.com/800x600.png?text=Portfolio+Project'
+        }
+      },
+      {
+        _id: '2',
+        title: 'Chatbot AI Assistant',
+        description: 'An AI-powered chatbot for customer service.',
+        category: 'ai',
+        github: 'https://github.com/yourusername/chatbot',
+        live: '',
+        tags: ['Python', 'TensorFlow', 'Flask'],
+        image: {
+          url: 'https://via.placeholder.com/800x600.png?text=Chatbot+AI'
+        }
+      },
+      {
+        _id: '3',
+        title: 'Mobile Task Manager',
+        description: 'A task management app built for Android and iOS.',
+        category: 'mobile',
+        github: 'https://github.com/yourusername/task-manager',
+        live: 'https://example.com',
+        tags: ['React Native', 'Redux'],
+        image: {
+          url: 'https://via.placeholder.com/800x600.png?text=Mobile+App'
+        }
+      },
+      {
+        _id: '4',
+        title: 'Mobile Task Manager',
+        description: 'A task management app built for Android and iOS.',
+        category: 'mobile',
+        github: 'https://github.com/yourusername/task-manager',
+        live: 'https://example.com',
+        tags: ['React Native', 'Redux'],
+        image: {
+          url: 'https://via.placeholder.com/800x600.png?text=Mobile+App'
+        }
+      },
+      {
+        _id: '5',
+        title: 'Mobile Task Manager',
+        description: 'A task management app built for Android and iOS.',
+        category: 'mobile',
+        github: 'https://github.com/yourusername/task-manager',
+        live: 'https://example.com',
+        tags: ['React Native', 'Redux'],
+        image: {
+          url: 'https://via.placeholder.com/800x600.png?text=Mobile+App'
         }
       }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleImageError = (e) => {
-    e.target.src = 'https://via.placeholder.com/800x600/0f172a/e2e8f0?text=Project+Preview';
-    e.target.onerror = null;
-  };
-
-  const getImageUrl = (project) => {
-    if (!project.image) {
-      return 'https://via.placeholder.com/800x600/0f172a/e2e8f0?text=Project+Preview';
-    }
-    
-    if (project.image.url) {
-      if (project.image.url.startsWith('http') || project.image.url.startsWith('data:')) {
-        return project.image.url;
-      }
-      return `${API_URL}${project.image.url}`;
-    }
-    
-    if (project.image.data) {
-      return `data:${project.image.contentType || 'image/jpeg'};base64,${project.image.data}`;
-    }
-    
-    return 'https://via.placeholder.com/800x600/0f172a/e2e8f0?text=Project+Preview';
-  };
+    ]);
 
   const getCategoryIcon = (category) => {
     switch(category) {
@@ -101,37 +93,6 @@ const ProjectsSection = () => {
     }
   };
 
-  if (loading) return (
-    <div style={{
-      padding: '6rem 1rem',
-      textAlign: 'center',
-      backgroundColor: '#1e293b',
-      minHeight: '50vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      color: '#e2e8f0',
-      fontSize: '1.1rem'
-    }}>
-      Loading projects...
-    </div>
-  );
-
-  if (error) return (
-    <div style={{
-      padding: '6rem 1rem',
-      textAlign: 'center',
-      backgroundColor: '#1e293b',
-      minHeight: '50vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      color: '#f87171',
-      fontSize: '1.1rem'
-    }}>
-      Error: {error}
-    </div>
-  );
 
   return (
     <section 
@@ -206,6 +167,7 @@ const ProjectsSection = () => {
               fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
               fontWeight: '700',
               marginBottom: '1rem',
+              marginTop: '8rem',
               textAlign: 'center',
               userSelect: 'none',
               letterSpacing: '1px',
@@ -332,7 +294,7 @@ const ProjectsSection = () => {
                     overflow: 'hidden',
                   }}>
                     <img 
-                      src={getImageUrl(project)} 
+                    src={project.image.url}
                       alt={project.title} 
                       style={{
                         width: '100%',
@@ -340,7 +302,6 @@ const ProjectsSection = () => {
                         objectFit: 'cover',
                         transition: 'transform 0.5s ease',
                       }}
-                      onError={handleImageError}
                       loading="lazy"
                     />
                   </div>

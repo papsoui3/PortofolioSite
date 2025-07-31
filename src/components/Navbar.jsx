@@ -183,13 +183,13 @@ const Navbar = () => {
     try {
       setIsDownloading(true);
       
-      const cvFilename = 'himantha_cv.pdf';
+      const cvFilename = 'Alexandros Papageorgiou CV.pdf';
       const publicPath = process.env.PUBLIC_URL || '';
       const cvUrl = `${publicPath}/documents/${cvFilename}`;
 
       const link = document.createElement('a');
       link.href = cvUrl;
-      link.download = `Himantha_Hirushan_CV_${new Date().getFullYear()}.pdf`;
+      link.download = `Alexandros_Papageorgiou_CV_${new Date().getFullYear()}.pdf`;
       link.target = '_blank';
       
       document.body.appendChild(link);
@@ -240,15 +240,14 @@ const Navbar = () => {
         borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
         transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         padding: '0.5rem 0',
-        height: '60px',
+        height: '100px',
         display: 'flex',
         alignItems: 'center',
       }}
     >
       <div style={{
-        maxWidth: '1280px',
         margin: '0 auto',
-        padding: '0 1.5rem',
+        padding: '0 7.5rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -277,7 +276,7 @@ const Navbar = () => {
           }}>
             <div style={{
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontWeight: 700,
+              fontWeight: 1000,
               fontSize: '1.5rem',
               color: 'white',
               letterSpacing: '-0.5px',
@@ -339,7 +338,7 @@ const Navbar = () => {
                     textDecoration: 'none',
                     transition: 'color 0.2s ease',
                     color: activeLink === item.target ? '#f97316' : '#cbd5e1',
-                    fontSize: '0.95rem',
+                    fontSize: '1.3rem',
                     fontWeight: 500,
                     padding: '0.3rem 0',
                     fontFamily: "'Inter', sans-serif",
@@ -384,7 +383,7 @@ const Navbar = () => {
                 e.target.style.transform = 'translateY(0)';
               }}
             >
-              <FaFileDownload style={{ fontSize: '0.9rem' }} />
+              <FaFileDownload style={{ fontSize: '1.6rem' }} />
               <span>{isDownloading ? 'Downloading...' : 'Download CV'}</span>
             </button>
           </div>

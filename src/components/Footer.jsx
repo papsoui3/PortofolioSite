@@ -1,13 +1,11 @@
 // src/components/Footer.jsx
-import React from 'react';
-import { FaGithub, FaLinkedin, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   // Your contact info:
   const phoneNumber = '+94768840107'; // in international format without spaces for links
-  const displayPhone = '+94 768 840 107'; // formatted for display
-  const email = 'himanthad4@gmail.com';
-  const whatsappLink = `https://wa.me/${phoneNumber.replace(/\D/g, '')}`; // wa.me link
+  const displayPhone = '+357 96439043'; // formatted for display
+  const email = 'papsoui3@gmail.com';
 
   // Helper: detect if mobile device (simple)
   const isMobile = () => {
@@ -123,7 +121,7 @@ const Footer = () => {
 
           <div className="footer-right" aria-label="Social and Contact Links">
             <a
-              href="https://github.com/himanthad4"
+              href="https://github.com/papsoui3"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
@@ -132,32 +130,14 @@ const Footer = () => {
               <FaGithub />
             </a>
             <a
-              href="https://www.linkedin.com/in/himantha-hirushan-390122212/"
+              href="https://www.linkedin.com/in/alexandros-papageorgiou-437716183/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
               title="LinkedIn"
             >
               <FaLinkedin />
-            </a>
-            <a
-              href="https://www.facebook.com/bytrmuse"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook Page Bytrmuse"
-              title="Facebook Page Bytrmuse"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp Chat"
-              title="WhatsApp Chat"
-            >
-              <FaWhatsapp />
-            </a>
+            </a>          
           </div>
         </div>
       </footer>

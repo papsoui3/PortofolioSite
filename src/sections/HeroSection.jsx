@@ -33,17 +33,10 @@ const HeroSection = () => {
   // Tech icons configuration
   const techIcons = [
     { icon: <FaReact color="#61DAFB" />, name: "React", pos: { top: '5%', left: '10%' }, size: 42 },
-    { icon: <FaNodeJs color="#68A063" />, name: "Node.js", pos: { top: '20%', right: '5%' }, size: 40 },
-    { icon: <SiJavascript color="#F7DF1E" />, name: "JavaScript", pos: { bottom: '25%', left: '5%' }, size: 38 },
-    { icon: <SiTypescript color="#3178C6" />, name: "TypeScript", pos: { bottom: '15%', right: '15%' }, size: 38 },
-    { icon: <FaPython color="#3776AB" />, name: "Python", pos: { top: '30%', right: '3%' }, size: 42 },
+    { icon: <FaPython color="#3776AB" />, name: "Python", pos: { top: '30%', left: '5%' }, size: 42 },
     { icon: <FaJava color="#007396" />, name: "Java", pos: { top: '10%', right: '20%' }, size: 38 },
-    { icon: <FaPhp color="#777BB4" />, name: "PHP", pos: { bottom: '30%', right: '5%' }, size: 36 },
-    { icon: <SiLaravel color="#FF2D20" />, name: "Laravel", pos: { top: '35%', left: '5%' }, size: 40 },
-    { icon: <SiMongodb color="#47A248" />, name: "MongoDB", pos: { bottom: '10%', left: '15%' }, size: 38 },
-    { icon: <SiMysql color="#4479A1" />, name: "MySQL", pos: { bottom: '5%', right: '10%' }, size: 36 },
-    { icon: <SiDocker color="#2496ED" />, name: "Docker", pos: { top: '40%', right: '12%' }, size: 42 },
-    { icon: <SiGraphql color="#E535AB" />, name: "GraphQL", pos: { bottom: '35%', left: '20%' }, size: 38 },
+    { icon: <FaPhp color="#777BB4" />, name: "PHP", pos: { bottom: '30%', right: '5%' }, size: 40 },
+    { icon: <SiMysql color="#4479A1" />, name: "MySQL", pos: { bottom: '20%', left: '5%' }, size: 36 },
   ];
 
   useEffect(() => {
@@ -283,13 +276,13 @@ const HeroSection = () => {
           <motion.div
             className="social-links-wrapper"
           >
-            <motion.div
+            {/* <motion.div
               className="social-links"
             >
               {[
                 { icon: <FaGithub />, url: 'https://github.com/HimanthaD4', label: 'GitHub', initialPos: { y: 50, x: -20 } },
                 { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/himantha-hirushan-390122212/', label: 'LinkedIn', initialPos: { y: 30, x: 20 } },
-                { icon: <FaFacebook />, url: 'https://web.facebook.com/himantha.hirushan.71', label: 'Facebook', initialPos: { y: 40, x: -10 } },
+                { icon: <FaFacebook />, url: 'https://web.facebook.com/Alex', label: 'Facebook', initialPos: { y: 40, x: -10 } },
                 { icon: <FaWhatsapp />, url: 'https://wa.me/94768840107', label: 'WhatsApp', initialPos: { y: 60, x: 10 } }
               ].map((social, index) => (
                 <motion.a
@@ -314,7 +307,7 @@ const HeroSection = () => {
                   {social.icon}
                 </motion.a>
               ))}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </motion.div>
         
@@ -383,7 +376,7 @@ const HeroSection = () => {
       </motion.div>
       
       {/* Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
@@ -407,18 +400,18 @@ const HeroSection = () => {
               repeatType: "loop"
             }}
           >
-            <FaChevronDown />
+            {/* <FaChevronDown /> 
           </motion.div>
-          <motion.span
+          {/* <motion.span
             className="scroll-text"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.8 }}
           >
             Explore My Work
-          </motion.span>
+          </motion.span> 
         </Link>
-      </motion.div>
+      </motion.div> */}
       
       <style jsx>{`
         .hero-section {

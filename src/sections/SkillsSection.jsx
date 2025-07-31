@@ -116,6 +116,7 @@ const SkillsSection = () => {
         {/* Section Header */}
         <div style={{
           display: 'flex',
+          marginTop: '12rem',
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
@@ -307,7 +308,7 @@ const SkillsSection = () => {
               display: 'inline-block',
             }}
           >
-            <button style={{
+            {/* <button style={{
               padding: '0.9rem 2.5rem',
               borderRadius: '8px',
               fontWeight: 600,
@@ -331,7 +332,7 @@ const SkillsSection = () => {
             }}
             >
               Let's Work Together <FaPaperPlane style={{ marginLeft: '8px' }} />
-            </button>
+            </button> */}
           </Link>
         </div>
       </div>

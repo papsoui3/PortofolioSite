@@ -123,6 +123,7 @@ const ServicesSection = () => {
         {/* Section Header */}
         <div style={{
           display: 'flex',
+          marginTop: '12rem',
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
