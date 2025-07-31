@@ -65,7 +65,7 @@ const AdminNavbar = () => {
             backgroundClip: 'text',
             color: 'transparent'
           }}>
-            ByteMuse
+            Papsoui
           </span>
           <span style={{ color: '#6B7280' }}>Admin</span>
         </Link>

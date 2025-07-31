@@ -24,7 +24,7 @@ const HeroSection = () => {
   const animationTimeoutRef = useRef(null);
 
   const roles = [
-    "Himantha Hirushan",
+    "Alexandros Papageorgiou",
     "Full Stack Developer",
     "Software Engineer",
     "ML Specialist",
