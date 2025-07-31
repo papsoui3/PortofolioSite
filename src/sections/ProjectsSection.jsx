@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import portfolioImg from '../images/PortofolioWebsite.png';
 import { FaGithub, FaGlobe, FaLayerGroup, FaCode, FaRobot, FaMobileAlt, FaDesktop, FaGamepad, FaMicrochip, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const ProjectsSection = () => {
@@ -18,7 +19,7 @@ const ProjectsSection = () => {
         live: 'https://yourdomain.com',
         tags: ['React', 'TailwindCSS', 'Framer Motion'],
         image: {
-          url: 'https://via.placeholder.com/800x600.png?text=Portfolio+Project'
+          url: portfolioImg
         }
       },
       {
@@ -506,7 +507,7 @@ const ProjectsSection = () => {
           </button>
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button
         <motion.div 
           style={{
             display: 'flex',
@@ -553,7 +554,7 @@ const ProjectsSection = () => {
               View Full Portfolio <FaLayerGroup style={{ marginLeft: '8px' }} />
             </button>
           </Link>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Floating particles */}
