@@ -15,8 +15,6 @@ const ProjectsSection = () => {
         title: 'Portfolio Website',
         description: 'A personal website to showcase my portfolio and skills.',
         category: 'web',
-        github: 'https://github.com/yourusername/portfolio',
-        live: 'https://yourdomain.com',
         tags: ['React', 'TailwindCSS', 'Framer Motion'],
         image: {
           url: portfolioImg

@@ -2,12 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
 import { motion, useAnimation } from 'framer-motion';
 import { 
-  FaGithub, FaLinkedin, FaFacebook, FaChevronDown,
-  FaReact, FaNodeJs, FaPython, FaJava, FaPhp,
-  FaCode, FaHandshake
+  FaReact, FaPython, FaJava, FaPhp,
+  FaCode, 
 } from 'react-icons/fa';
-import { FaWhatsapp } from 'react-icons/fa6';
-import { SiLaravel, SiMongodb, SiMysql, SiJavascript, SiTypescript, SiDocker, SiGraphql } from 'react-icons/si';
+import {  SiMysql, } from 'react-icons/si';
 
 import HeroImage from '../images/main.png';
 
@@ -766,7 +764,7 @@ const HeroSection = () => {
         
         @media (max-width: 480px) {
           .hero-section {
-            padding: 60px 5% 80px;
+            padding: 120px 5% 80px;
           }
           
           .hero-title {

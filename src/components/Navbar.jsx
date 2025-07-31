@@ -247,7 +247,7 @@ const Navbar = () => {
     >
       <div style={{
         margin: '0 auto',
-        padding: '0 7.5rem',
+        padding: '0 2.5rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
