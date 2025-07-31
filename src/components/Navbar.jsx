@@ -283,10 +283,10 @@ const Navbar = () => {
               letterSpacing: '-0.5px',
               position: 'relative',
             }}>
-              Byte<span style={{ 
+              Pap<span style={{ 
                 color: '#f97316',
                 fontWeight: 800 
-              }}>Muse</span>
+              }}>soui</span>
             </div>
             <div style={{
               position: 'absolute',
