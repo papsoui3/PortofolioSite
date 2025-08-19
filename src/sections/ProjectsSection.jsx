@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import portfolioImg from '../images/PortofolioWebsite.png';
-import { FaGithub, FaGlobe, FaLayerGroup, FaCode, FaRobot, FaMobileAlt, FaDesktop, FaGamepad, FaMicrochip, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import trifoldImg from '../images/trifold.png';
+import { FaGithub, FaGlobe, FaDraftingCompass, FaCode, FaRobot, FaMobileAlt, FaDesktop, FaGamepad, FaMicrochip, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -22,42 +23,27 @@ const ProjectsSection = () => {
       },
       {
         _id: '2',
-        title: 'Chatbot AI Assistant',
-        description: 'An AI-powered chatbot for customer service.',
-        category: 'ai',
-        github: 'https://github.com/yourusername/chatbot',
-        live: '',
-        tags: ['Python', 'TensorFlow', 'Flask'],
+        title: 'Trifold Flyer ',
+        description: 'A Business trifold flyer designed for a local business.',
+        category: 'design',
+        live: 'https://www.canva.com/design/DAEvz5linNc/QhaoZdUg-SU3-B36Xqzr0A/view?utm_content=DAEvz5linNc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h681d543acd',
+        tags: ['Canvas'],
         image: {
-          url: 'https://via.placeholder.com/800x600.png?text=Chatbot+AI'
+          url: trifoldImg
         }
       },
       {
         _id: '3',
-        title: 'Mobile Task Manager',
-        description: 'A task management app built for Android and iOS.',
-        category: 'mobile',
-        github: 'https://github.com/yourusername/task-manager',
-        live: 'https://example.com',
-        tags: ['React Native', 'Redux'],
+        title: 'UIPath RPA Automation',
+        description: 'An RPA automation project using UIPath to automate business processes that splits A PDF file into multiple files based on the insurances.',
+        category: 'ai',
+        tags: ['UIPath'],
         image: {
           url: 'https://via.placeholder.com/800x600.png?text=Mobile+App'
         }
       },
       {
         _id: '4',
-        title: 'Mobile Task Manager',
-        description: 'A task management app built for Android and iOS.',
-        category: 'mobile',
-        github: 'https://github.com/yourusername/task-manager',
-        live: 'https://example.com',
-        tags: ['React Native', 'Redux'],
-        image: {
-          url: 'https://via.placeholder.com/800x600.png?text=Mobile+App'
-        }
-      },
-      {
-        _id: '5',
         title: 'Mobile Task Manager',
         description: 'A task management app built for Android and iOS.',
         category: 'mobile',
@@ -77,6 +63,7 @@ const ProjectsSection = () => {
       case 'mobile': return <FaMobileAlt />;
       case 'desktop': return <FaDesktop />;
       case 'game': return <FaGamepad />;
+      case 'design': return <FaDraftingCompass/>;
       case 'embedded': return <FaMicrochip />;
       default: return <FaCode />;
     }
@@ -623,7 +610,7 @@ const ProjectsSection = () => {
       case 'mobile': return `rgba(74, 222, 128, ${opacity})`;
       case 'desktop': return `rgba(139, 92, 246, ${opacity})`;
       case 'game': return `rgba(236, 72, 153, ${opacity})`;
-      case 'embedded': return `rgba(20, 184, 166, ${opacity})`;
+      case 'design': return `rgba(20, 184, 166, ${opacity})`;
       default: return `rgba(156, 163, 175, ${opacity})`;
     }
   }
@@ -635,7 +622,7 @@ const ProjectsSection = () => {
       case 'mobile': return 'rgba(74, 222, 128, 0.12)';
       case 'desktop': return 'rgba(139, 92, 246, 0.12)';
       case 'game': return 'rgba(236, 72, 153, 0.12)';
-      case 'embedded': return 'rgba(20, 184, 166, 0.12)';
+      case 'design': return 'rgba(20, 184, 166, 0.12)';
       default: return 'rgba(156, 163, 175, 0.12)';
     }
   }
@@ -647,7 +634,7 @@ const ProjectsSection = () => {
       case 'mobile': return 'rgba(74, 222, 128, 0.2)';
       case 'desktop': return 'rgba(139, 92, 246, 0.2)';
       case 'game': return 'rgba(236, 72, 153, 0.2)';
-      case 'embedded': return 'rgba(20, 184, 166, 0.2)';
+      case 'design': return 'rgba(20, 184, 166, 0.2)';
       default: return 'rgba(156, 163, 175, 0.2)';
     }
   }
@@ -659,7 +646,7 @@ const ProjectsSection = () => {
       case 'mobile': return '#4ade80';
       case 'desktop': return '#8b5cf6';
       case 'game': return '#ec4899';
-      case 'embedded': return '#14b8a6';
+      case 'design': return '#14b8a6';
       default: return '#9ca3af';
     }
   }
@@ -671,7 +658,7 @@ const ProjectsSection = () => {
       case 'mobile': return 'MOBILE';
       case 'desktop': return 'DESKTOP';
       case 'game': return 'GAME';
-      case 'embedded': return 'EMBEDDED';
+      case 'design': return 'DESIGN';
       default: return 'PROJECT';
     }
   }
