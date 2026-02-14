@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import NavbarProjects from "./components/ProjectsNavBar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import { Helmet } from "react-helmet";
 import AllProjects from "./pages/AllProjects";
 
 function ScrollToTop() {
