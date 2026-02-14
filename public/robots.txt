@@ -1,3 +1,6 @@
-# https://www.robotstxt.org/robotstxt.html
+# Allow all search engines to crawl your site
 User-agent: *
-Disallow:
+Allow: /
+
+# Link to your sitemap for faster indexing
+Sitemap: https://alex-portofolio-site.vercel.app/sitemap.xml
