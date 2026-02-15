@@ -1,12 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
-import { FaBars, FaTimes, FaFileDownload, FaChevronDown } from 'react-icons/fa';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import { FaBars, FaTimes, FaFileDownload, FaChevronDown } from "react-icons/fa";
 
-const SmartNavLink = ({ to, children, activeLink, setActiveLink, linkRefs, scrollSettings, handleMouseEnter, handleMouseLeave, ...props }) => {
+const SmartNavLink = ({
+  to,
+  children,
+  activeLink,
+  setActiveLink,
+  linkRefs,
+  scrollSettings,
+  handleMouseEnter,
+  handleMouseLeave,
+  ...props
+}) => {
   const location = useLocation();
-  
-  if (location.pathname === '/') {
+
+  if (location.pathname === "/") {
     return (
       <ScrollLink
         to={to}
@@ -33,7 +49,7 @@ const SmartNavLink = ({ to, children, activeLink, setActiveLink, linkRefs, scrol
         setTimeout(() => {
           const element = document.getElementById(to);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView({ behavior: "smooth" });
           }
         }, 10);
       }}
@@ -49,15 +65,15 @@ const SmartNavLink = ({ to, children, activeLink, setActiveLink, linkRefs, scrol
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState('home');
+  const [activeLink, setActiveLink] = useState("home");
   const [underlineStyle, setUnderlineStyle] = useState({
     width: 0,
     left: 0,
-    opacity: 0
+    opacity: 0,
   });
   const [isDownloading, setIsDownloading] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  
+
   const navRef = useRef(null);
   const linkRefs = useRef({});
   const mobileMenuRef = useRef(null);
@@ -78,94 +94,97 @@ const Navbar = () => {
       updateUnderline(activeLink);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
-    
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
-  }, [activeLink]);
+  }, [activeLink, updateUnderline]);
 
-  const navItems = [
-    { 
-      name: 'Home', 
-      target: 'home',
-      scrollSettings: {
-        duration: 600,
-        offset: -80
-      }
-    },
-    { 
-      name: 'Projects', 
-      target: 'projects',
-      scrollSettings: {
-        duration: 600,
-        offset: -60
-      }
-    },
-    { 
-      name: 'Services', 
-      target: 'services',
-      scrollSettings: {
-        duration: 600,
-        offset: -60
-      }
-    },
-    { 
-      name: 'Skills', 
-      target: 'skills',
-      scrollSettings: {
-        duration: 600,
-        offset: -40
-      }
-    },
-    { 
-      name: 'Process', 
-      target: 'process',
-      scrollSettings: {
-        duration: 1000,  
-        offset: -50   
-      }
-    },
-    { 
-      name: 'About', 
-      target: 'about',
-      scrollSettings: {
-        duration: 600,
-        offset: -80
-      }
-    },
-    { 
-      name: 'Contact', 
-      target: 'contact',
-      scrollSettings: {
-        duration: 800,
-        offset: -60
-      }
-    },
-  ];
+  const navItems = useMemo(
+    () => [
+      {
+        name: "Home",
+        target: "home",
+        scrollSettings: {
+          duration: 600,
+          offset: -80,
+        },
+      },
+      {
+        name: "Projects",
+        target: "projects",
+        scrollSettings: {
+          duration: 600,
+          offset: -60,
+        },
+      },
+      {
+        name: "Services",
+        target: "services",
+        scrollSettings: {
+          duration: 600,
+          offset: -60,
+        },
+      },
+      {
+        name: "Skills",
+        target: "skills",
+        scrollSettings: {
+          duration: 600,
+          offset: -40,
+        },
+      },
+      {
+        name: "Process",
+        target: "process",
+        scrollSettings: {
+          duration: 1000,
+          offset: -50,
+        },
+      },
+      {
+        name: "About",
+        target: "about",
+        scrollSettings: {
+          duration: 600,
+          offset: -80,
+        },
+      },
+      {
+        name: "Contact",
+        target: "contact",
+        scrollSettings: {
+          duration: 800,
+          offset: -60,
+        },
+      },
+    ],
+    [],
+  );
 
-  const updateUnderline = (linkName) => {
+  const updateUnderline = useCallback((linkName) => {
     const linkElement = linkRefs.current[linkName];
     if (!linkElement || !navRef.current) return;
-    
+
     const linkRect = linkElement.getBoundingClientRect();
     const navRect = navRef.current.getBoundingClientRect();
-    
+
     setUnderlineStyle({
       width: linkRect.width,
       left: linkRect.left - navRect.left,
       opacity: 1,
-      transition: 'all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)'
+      transition: "all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
     });
-  };
+  }, []);
 
   useEffect(() => {
     if (navItems.length > 0 && !isMobile) {
       updateUnderline(activeLink);
     }
-  }, [activeLink, location.pathname, isMobile,navItems.length]);
+  }, [activeLink, location.pathname, isMobile, updateUnderline]);
 
   const handleMouseEnter = (linkName) => {
     if (linkName !== activeLink && !isMobile) {
@@ -182,77 +201,83 @@ const Navbar = () => {
   const handleDownloadCV = async () => {
     try {
       setIsDownloading(true);
-      
-      const cvFilename = 'Alexandros Papageorgiou CV.pdf';
-      const publicPath = process.env.PUBLIC_URL || '';
+
+      const cvFilename = "Alexandros Papageorgiou CV.pdf";
+      const publicPath = process.env.PUBLIC_URL || "";
       const cvUrl = `${publicPath}/documents/${cvFilename}`;
 
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = cvUrl;
       link.download = `Alexandros_Papageorgiou_CV_${new Date().getFullYear()}.pdf`;
-      link.target = '_blank';
-      
+      link.target = "_blank";
+
       document.body.appendChild(link);
       link.click();
-      
+
       setTimeout(() => {
         document.body.removeChild(link);
         window.URL.revokeObjectURL(cvUrl);
       }, 100);
-
     } catch (error) {
-      console.error('Download error:', error);
-      alert('CV download failed. Please contact me directly at your@email.com');
+      console.error("Download error:", error);
+      alert("CV download failed. Please contact me directly at your@email.com");
     } finally {
       setIsDownloading(false);
     }
   };
 
   // Close mobile menu when clicking outside
-// Close mobile menu when clicking outside
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
-          if (isOpen && isMobile) {
-            setIsOpen(false);
-          }
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
+        if (isOpen && isMobile) {
+          setIsOpen(false);
         }
-      };
+      }
+    };
 
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [isOpen, isMobile]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, isMobile]);
 
   return (
-    <nav 
+    <nav
       ref={navRef}
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         zIndex: 1000,
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        backgroundColor: scrolled ? 'rgba(15, 23, 42, 0.98)' : 'rgba(15, 23, 42, 0.95)',
-        borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
-        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-        padding: '0.5rem 0',
-        height: '100px',
-        display: 'flex',
-        alignItems: 'center',
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        backgroundColor: scrolled
+          ? "rgba(15, 23, 42, 0.98)"
+          : "rgba(15, 23, 42, 0.95)",
+        borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.05)" : "none",
+        transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        padding: "0.5rem 0",
+        height: "100px",
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      <div style={{
-        margin: '0 auto',
-        padding: '0 2.5rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-      }}>
+      <div
+        style={{
+          margin: "0 auto",
+          padding: "0 2.5rem",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
         {/* Logo */}
         <SmartNavLink
           to="home"
@@ -260,68 +285,86 @@ const Navbar = () => {
           setActiveLink={setActiveLink}
           linkRefs={linkRefs}
           scrollSettings={{ duration: 600, offset: -80 }}
-          handleMouseEnter={() => handleMouseEnter('home')}
+          handleMouseEnter={() => handleMouseEnter("home")}
           handleMouseLeave={handleMouseLeave}
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            cursor: 'pointer',
-            textDecoration: 'none',
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            textDecoration: "none",
             zIndex: 1001,
           }}
           onClick={() => isMobile && setIsOpen(false)}
         >
-          <div style={{
-            position: 'relative',
-          }}>
-            <div style={{
-              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontWeight: 1000,
-              fontSize: '1.5rem',
-              color: 'white',
-              letterSpacing: '-0.5px',
-              position: 'relative',
-            }}>
-              Pap<span style={{ 
-                color: '#f97316',
-                fontWeight: 800 
-              }}>soui</span>
+          <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                fontFamily:
+                  "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontWeight: 1000,
+                fontSize: "1.5rem",
+                color: "white",
+                letterSpacing: "-0.5px",
+                position: "relative",
+              }}
+            >
+              Pap
+              <span
+                style={{
+                  color: "#f97316",
+                  fontWeight: 800,
+                }}
+              >
+                soui
+              </span>
             </div>
-            <div style={{
-              position: 'absolute',
-              bottom: '-2px',
-              right: 0,
-              height: '2px',
-              width: '100%',
-              background: 'linear-gradient(90deg, #f97316, #f59e0b)',
-              borderRadius: '1px',
-            }}></div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-2px",
+                right: 0,
+                height: "2px",
+                width: "100%",
+                background: "linear-gradient(90deg, #f97316, #f59e0b)",
+                borderRadius: "1px",
+              }}
+            ></div>
           </div>
         </SmartNavLink>
 
         {/* Desktop Navigation */}
         {!isMobile && (
-          <div style={{
-            display: 'flex',
-            gap: '1.2rem',
-            alignItems: 'center',
-            position: 'relative',
-          }}>
-            <div style={{
-              display: 'flex',
-              gap: '1.8rem',
-              marginRight: '1.8rem',
-              position: 'relative',
-            }}>
-              <div style={{
-                position: 'absolute',
-                bottom: '-6px',
-                height: '2px',
-                background: 'linear-gradient(90deg, #f97316, #f59e0b)',
-                borderRadius: '1px',
-                ...underlineStyle
-              }}></div>
-              
+          <div
+            style={{
+              display: "flex",
+              gap: "1.2rem",
+              alignItems: "center",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                gap: "1.8rem",
+                marginRight: "1.8rem",
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "-6px",
+                  height: "2px",
+                  background: "linear-gradient(90deg, #f97316, #f59e0b)",
+                  borderRadius: "1px",
+                  ...underlineStyle,
+                }}
+              ></div>
+
               {navItems.map((item) => (
                 <SmartNavLink
                   key={item.name}
@@ -333,58 +376,58 @@ const Navbar = () => {
                   handleMouseEnter={() => handleMouseEnter(item.target)}
                   handleMouseLeave={handleMouseLeave}
                   style={{
-                    position: 'relative',
-                    cursor: 'pointer',
-                    textDecoration: 'none',
-                    transition: 'color 0.2s ease',
-                    color: activeLink === item.target ? '#f97316' : '#cbd5e1',
-                    fontSize: '1.3rem',
+                    position: "relative",
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    transition: "color 0.2s ease",
+                    color: activeLink === item.target ? "#f97316" : "#cbd5e1",
+                    fontSize: "1.3rem",
                     fontWeight: 500,
-                    padding: '0.3rem 0',
+                    padding: "0.3rem 0",
                     fontFamily: "'Inter', sans-serif",
-                    letterSpacing: '0.3px',
-                    whiteSpace: 'nowrap'
+                    letterSpacing: "0.3px",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {item.name}
                 </SmartNavLink>
               ))}
             </div>
-            
-            <button 
+
+            <button
               onClick={handleDownloadCV}
               disabled={isDownloading}
               style={{
-                background: 'rgba(249, 115, 22, 0.15)',
-                border: '1px solid rgba(249, 115, 22, 0.2)',
-                color: '#f97316',
-                padding: '0.5rem 1.2rem',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                fontSize: '0.9rem',
-                fontWeight: '500',
-                letterSpacing: '0.3px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
+                background: "rgba(249, 115, 22, 0.15)",
+                border: "1px solid rgba(249, 115, 22, 0.2)",
+                color: "#f97316",
+                padding: "0.5rem 1.2rem",
+                borderRadius: "5px",
+                cursor: "pointer",
+                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                fontSize: "0.9rem",
+                fontWeight: "500",
+                letterSpacing: "0.3px",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
                 fontFamily: "'Inter', sans-serif",
                 opacity: isDownloading ? 0.7 : 1,
-                pointerEvents: isDownloading ? 'none' : 'auto',
+                pointerEvents: isDownloading ? "none" : "auto",
               }}
-              onMouseEnter={e => {
+              onMouseEnter={(e) => {
                 if (!isDownloading) {
-                  e.target.style.background = 'rgba(249, 115, 22, 0.25)';
-                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.background = "rgba(249, 115, 22, 0.25)";
+                  e.target.style.transform = "translateY(-2px)";
                 }
               }}
-              onMouseLeave={e => {
-                e.target.style.background = 'rgba(249, 115, 22, 0.15)';
-                e.target.style.transform = 'translateY(0)';
+              onMouseLeave={(e) => {
+                e.target.style.background = "rgba(249, 115, 22, 0.15)";
+                e.target.style.transform = "translateY(0)";
               }}
             >
-              <FaFileDownload style={{ fontSize: '1.6rem' }} />
-              <span>{isDownloading ? 'Downloading...' : 'Download CV'}</span>
+              <FaFileDownload style={{ fontSize: "1.6rem" }} />
+              <span>{isDownloading ? "Downloading..." : "Download CV"}</span>
             </button>
           </div>
         )}
@@ -393,15 +436,15 @@ const Navbar = () => {
         {isMobile && (
           <button
             style={{
-              background: 'none',
-              border: 'none',
-              color: isOpen ? '#f97316' : '#cbd5e1',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-              padding: '0.4rem',
-              borderRadius: '5px',
+              background: "none",
+              border: "none",
+              color: isOpen ? "#f97316" : "#cbd5e1",
+              fontSize: "1.5rem",
+              cursor: "pointer",
+              padding: "0.4rem",
+              borderRadius: "5px",
               zIndex: 1001,
-              transition: 'all 0.3s ease',
+              transition: "all 0.3s ease",
             }}
             onClick={toggleMenu}
             aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -416,25 +459,25 @@ const Navbar = () => {
         <div
           ref={mobileMenuRef}
           style={{
-            position: 'fixed',
-            top: '60px',
+            position: "fixed",
+            top: "60px",
             left: 0,
             right: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.98)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
+            backgroundColor: "rgba(15, 23, 42, 0.98)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
             zIndex: 999,
-            padding: '1rem',
-            display: isOpen ? 'flex' : 'none',
-            flexDirection: 'column',
-            gap: '0.5rem',
-            borderBottom: '1px solid rgba(255,255,255,0.05)',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
-            transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
+            padding: "1rem",
+            display: isOpen ? "flex" : "none",
+            flexDirection: "column",
+            gap: "0.5rem",
+            borderBottom: "1px solid rgba(255,255,255,0.05)",
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+            transform: isOpen ? "translateY(0)" : "translateY(-100%)",
             opacity: isOpen ? 1 : 0,
-            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-            maxHeight: 'calc(100vh - 60px)',
-            overflowY: 'auto',
+            transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            maxHeight: "calc(100vh - 60px)",
+            overflowY: "auto",
           }}
         >
           {navItems.map((item) => (
@@ -446,64 +489,76 @@ const Navbar = () => {
               linkRefs={linkRefs}
               scrollSettings={item.scrollSettings}
               style={{
-                padding: '1rem 1.5rem',
-                color: activeLink === item.target ? '#f97316' : '#cbd5e1',
-                fontSize: '1.1rem',
+                padding: "1rem 1.5rem",
+                color: activeLink === item.target ? "#f97316" : "#cbd5e1",
+                fontSize: "1.1rem",
                 fontWeight: 500,
-                textDecoration: 'none',
-                borderRadius: '6px',
-                background: activeLink === item.target ? 'rgba(249, 115, 22, 0.1)' : 'transparent',
-                transition: 'all 0.3s ease',
+                textDecoration: "none",
+                borderRadius: "6px",
+                background:
+                  activeLink === item.target
+                    ? "rgba(249, 115, 22, 0.1)"
+                    : "transparent",
+                transition: "all 0.3s ease",
                 fontFamily: "'Inter', sans-serif",
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
               onClick={() => {
                 setIsOpen(false);
               }}
-              onMouseEnter={e => e.target.style.background = 'rgba(249, 115, 22, 0.1)'}
-              onMouseLeave={e => e.target.style.background = activeLink === item.target ? 'rgba(249, 115, 22, 0.1)' : 'transparent'}
+              onMouseEnter={(e) =>
+                (e.target.style.background = "rgba(249, 115, 22, 0.1)")
+              }
+              onMouseLeave={(e) =>
+                (e.target.style.background =
+                  activeLink === item.target
+                    ? "rgba(249, 115, 22, 0.1)"
+                    : "transparent")
+              }
             >
               <span>{item.name}</span>
               {activeLink === item.target && (
-                <FaChevronDown style={{ 
-                  transform: 'rotate(-90deg)',
-                  fontSize: '0.9rem',
-                  color: '#f97316'
-                }} />
+                <FaChevronDown
+                  style={{
+                    transform: "rotate(-90deg)",
+                    fontSize: "0.9rem",
+                    color: "#f97316",
+                  }}
+                />
               )}
             </SmartNavLink>
           ))}
-          
-          <button 
+
+          <button
             onClick={() => {
               handleDownloadCV();
               setIsOpen(false);
             }}
             disabled={isDownloading}
             style={{
-              padding: '1rem 1.5rem',
-              background: 'rgba(249, 115, 22, 0.15)',
-              border: '1px solid rgba(249, 115, 22, 0.2)',
-              color: '#f97316',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              fontSize: '1.1rem',
-              fontWeight: '500',
-              marginTop: '0.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.8rem',
+              padding: "1rem 1.5rem",
+              background: "rgba(249, 115, 22, 0.15)",
+              border: "1px solid rgba(249, 115, 22, 0.2)",
+              color: "#f97316",
+              borderRadius: "6px",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              fontSize: "1.1rem",
+              fontWeight: "500",
+              marginTop: "0.5rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.8rem",
               fontFamily: "'Inter', sans-serif",
               opacity: isDownloading ? 0.7 : 1,
-              pointerEvents: isDownloading ? 'none' : 'auto',
+              pointerEvents: isDownloading ? "none" : "auto",
             }}
           >
-            <FaFileDownload style={{ fontSize: '1rem' }} />
-            <span>{isDownloading ? 'Downloading...' : 'Download CV'}</span>
+            <FaFileDownload style={{ fontSize: "1rem" }} />
+            <span>{isDownloading ? "Downloading..." : "Download CV"}</span>
           </button>
         </div>
       )}
