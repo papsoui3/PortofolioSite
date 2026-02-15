@@ -80,6 +80,20 @@ const Navbar = () => {
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  const updateUnderline = useCallback((linkName) => {
+    const linkElement = linkRefs.current[linkName];
+    if (!linkElement || !navRef.current) return;
+
+    const linkRect = linkElement.getBoundingClientRect();
+    const navRect = navRef.current.getBoundingClientRect();
+
+    setUnderlineStyle({
+      width: linkRect.width,
+      left: linkRect.left - navRect.left,
+      opacity: 1,
+      transition: "all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -165,26 +179,17 @@ const Navbar = () => {
     [],
   );
 
-  const updateUnderline = useCallback((linkName) => {
-    const linkElement = linkRefs.current[linkName];
-    if (!linkElement || !navRef.current) return;
-
-    const linkRect = linkElement.getBoundingClientRect();
-    const navRect = navRef.current.getBoundingClientRect();
-
-    setUnderlineStyle({
-      width: linkRect.width,
-      left: linkRect.left - navRect.left,
-      opacity: 1,
-      transition: "all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
-    });
-  }, []);
-
   useEffect(() => {
     if (navItems.length > 0 && !isMobile) {
       updateUnderline(activeLink);
     }
-  }, [activeLink, location.pathname, isMobile, updateUnderline]);
+  }, [
+    activeLink,
+    location.pathname,
+    isMobile,
+    updateUnderline,
+    navItems.length,
+  ]);
 
   const handleMouseEnter = (linkName) => {
     if (linkName !== activeLink && !isMobile) {

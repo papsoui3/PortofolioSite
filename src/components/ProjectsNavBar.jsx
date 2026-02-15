@@ -74,6 +74,25 @@ const ProjectNavBar = () => {
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  const updateUnderline = React.useCallback(
+    (linkName) => {
+      if (isMobile) return;
+
+      const linkElement = linkRefs.current[linkName];
+      if (!linkElement || !navRef.current) return;
+
+      const linkRect = linkElement.getBoundingClientRect();
+      const navRect = navRef.current.getBoundingClientRect();
+
+      setUnderlineStyle({
+        width: linkRect.width,
+        left: linkRect.left - navRect.left,
+        opacity: 1,
+        transition: "all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
+      });
+    },
+    [isMobile],
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,25 +115,7 @@ const ProjectNavBar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [activeLink, updateUnderline]);
-  const updateUnderline = React.useCallback(
-    (linkName) => {
-      if (isMobile) return;
 
-      const linkElement = linkRefs.current[linkName];
-      if (!linkElement || !navRef.current) return;
-
-      const linkRect = linkElement.getBoundingClientRect();
-      const navRect = navRef.current.getBoundingClientRect();
-
-      setUnderlineStyle({
-        width: linkRect.width,
-        left: linkRect.left - navRect.left,
-        opacity: 1,
-        transition: "all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)",
-      });
-    },
-    [isMobile],
-  );
   const navItems = React.useMemo(
     () => [
       {

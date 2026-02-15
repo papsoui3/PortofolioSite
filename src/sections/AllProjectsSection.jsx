@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaGlobe, FaCode, FaRobot, FaMobileAlt, FaSearch, FaTimes } from 'react-icons/fa';
+import { FaGlobe, FaCode, FaRobot, FaMobileAlt, FaSearch, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
