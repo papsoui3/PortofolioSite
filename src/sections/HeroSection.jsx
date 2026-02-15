@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { Link } from "react-scroll";
 import { motion, useAnimation } from "framer-motion";
 import { FaReact, FaPython, FaJava, FaPhp, FaCode } from "react-icons/fa";
@@ -18,46 +24,52 @@ const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
   const animationTimeoutRef = useRef(null);
 
-  const roles = [
-    "Alexandros Papageorgiou",
-    "Full Stack Developer",
-    "Software Engineer",
-    "Web Developer",
-  ];
+  const roles = useMemo(
+    () => [
+      "Alexandros Papageorgiou",
+      "Full Stack Developer",
+      "Software Engineer",
+      "Web Developer",
+    ],
+    [],
+  );
 
   // Tech icons configuration
-  const techIcons = [
-    {
-      icon: <FaReact color="#61DAFB" />,
-      name: "React",
-      pos: { top: "5%", left: "10%" },
-      size: 42,
-    },
-    {
-      icon: <FaPython color="#3776AB" />,
-      name: "Python",
-      pos: { top: "30%", left: "5%" },
-      size: 42,
-    },
-    {
-      icon: <FaJava color="#007396" />,
-      name: "Java",
-      pos: { top: "10%", right: "20%" },
-      size: 38,
-    },
-    {
-      icon: <FaPhp color="#777BB4" />,
-      name: "PHP",
-      pos: { bottom: "30%", right: "5%" },
-      size: 40,
-    },
-    {
-      icon: <SiMysql color="#4479A1" />,
-      name: "MySQL",
-      pos: { bottom: "20%", left: "5%" },
-      size: 36,
-    },
-  ];
+  const techIcons = useMemo(
+    () => [
+      {
+        icon: <FaReact color="#61DAFB" />,
+        name: "React",
+        pos: { top: "5%", left: "10%" },
+        size: 42,
+      },
+      {
+        icon: <FaPython color="#3776AB" />,
+        name: "Python",
+        pos: { top: "30%", left: "5%" },
+        size: 42,
+      },
+      {
+        icon: <FaJava color="#007396" />,
+        name: "Java",
+        pos: { top: "10%", right: "20%" },
+        size: 38,
+      },
+      {
+        icon: <FaPhp color="#777BB4" />,
+        name: "PHP",
+        pos: { bottom: "30%", right: "5%" },
+        size: 40,
+      },
+      {
+        icon: <SiMysql color="#4479A1" />,
+        name: "MySQL",
+        pos: { bottom: "20%", left: "5%" },
+        size: 36,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -162,7 +174,15 @@ const HeroSection = () => {
       techControls.stop();
       socialControls.stop();
     };
-  }, [mounted, controls, imageControls, techControls, socialControls]);
+  }, [
+    mounted,
+    controls,
+    imageControls,
+    techControls,
+    socialControls,
+    startRandomPopAnimation,
+    techIcons.length,
+  ]);
 
   // Initialize image off-screen
   useEffect(() => {
@@ -175,7 +195,7 @@ const HeroSection = () => {
   }, [mounted]);
 
   // Random popping animation for tech icons
-  const startRandomPopAnimation = () => {
+  const startRandomPopAnimation = useCallback(() => {
     if (!mounted) return;
 
     const animateRandomIcons = () => {
@@ -211,7 +231,7 @@ const HeroSection = () => {
     };
 
     animateRandomIcons();
-  };
+  }, [mounted, techIcons, techControls]);
 
   return (
     <section id="home" ref={containerRef} className="hero-section">

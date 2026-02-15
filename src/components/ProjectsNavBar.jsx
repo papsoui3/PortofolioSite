@@ -134,7 +134,13 @@ const ProjectNavBar = () => {
     if (navItems.length > 0 && !isMobile) {
       updateUnderline(activeLink);
     }
-  }, [activeLink, location.pathname, isMobile, updateUnderline]);
+  }, [
+    activeLink,
+    location.pathname,
+    isMobile,
+    updateUnderline,
+    navItems.length,
+  ]);
 
   const handleMouseEnter = (linkName) => {
     if (linkName !== activeLink && !isMobile) {
