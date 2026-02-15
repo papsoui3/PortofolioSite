@@ -33,43 +33,6 @@ const HeroSection = () => {
     ],
     [],
   );
-  const startRandomPopAnimation = useCallback(() => {
-    if (!mounted) return;
-
-    const animateRandomIcons = () => {
-      if (!mounted) return;
-
-      const visibleIcons = techIcons.map((_, index) => index);
-      const iconsToAnimate = [];
-      const count = 2 + Math.floor(Math.random() * 2);
-
-      for (let i = 0; i < count; i++) {
-        if (visibleIcons.length === 0) break;
-        const randomIndex = Math.floor(Math.random() * visibleIcons.length);
-        iconsToAnimate.push(visibleIcons.splice(randomIndex, 1)[0]);
-      }
-
-      iconsToAnimate.forEach((index) => {
-        techControls.start((i) => {
-          if (i === index) {
-            return {
-              scale: [1, 1.4, 1],
-              transition: {
-                duration: 0.6,
-                ease: "backOut",
-              },
-            };
-          }
-          return {};
-        });
-      });
-
-      const nextDelay = 1000 + Math.random() * 2000;
-      animationTimeoutRef.current = setTimeout(animateRandomIcons, nextDelay);
-    };
-
-    animateRandomIcons();
-  }, [mounted, techIcons, techControls]);
 
   // Tech icons configuration
   const techIcons = useMemo(
@@ -107,6 +70,43 @@ const HeroSection = () => {
     ],
     [],
   );
+  const startRandomPopAnimation = useCallback(() => {
+    if (!mounted) return;
+
+    const animateRandomIcons = () => {
+      if (!mounted) return;
+
+      const visibleIcons = techIcons.map((_, index) => index);
+      const iconsToAnimate = [];
+      const count = 2 + Math.floor(Math.random() * 2);
+
+      for (let i = 0; i < count; i++) {
+        if (visibleIcons.length === 0) break;
+        const randomIndex = Math.floor(Math.random() * visibleIcons.length);
+        iconsToAnimate.push(visibleIcons.splice(randomIndex, 1)[0]);
+      }
+
+      iconsToAnimate.forEach((index) => {
+        techControls.start((i) => {
+          if (i === index) {
+            return {
+              scale: [1, 1.4, 1],
+              transition: {
+                duration: 0.6,
+                ease: "backOut",
+              },
+            };
+          }
+          return {};
+        });
+      });
+
+      const nextDelay = 1000 + Math.random() * 2000;
+      animationTimeoutRef.current = setTimeout(animateRandomIcons, nextDelay);
+    };
+
+    animateRandomIcons();
+  }, [mounted, techIcons, techControls]);
 
   useEffect(() => {
     setMounted(true);
