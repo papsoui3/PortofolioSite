@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import portfolioImg from "../images/PortofolioWebsite.png";
-import trifoldImg from "../images/trifold.png";
+import portfolioImg from "../images/PortofolioWebsite.webp";
+import trifoldImg from "../images/trifold.webp";
 import {
   FaGlobe,
   FaDraftingCompass,

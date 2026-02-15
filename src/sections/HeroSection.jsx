@@ -10,7 +10,7 @@ import { motion, useAnimation } from "framer-motion";
 import { FaReact, FaPython, FaJava, FaPhp, FaCode } from "react-icons/fa";
 import { SiMysql } from "react-icons/si";
 
-import HeroImage from "../images/main.png";
+import HeroImage from "../images/main.webp";
 
 const HeroSection = () => {
   const [typedText, setTypedText] = useState("");
