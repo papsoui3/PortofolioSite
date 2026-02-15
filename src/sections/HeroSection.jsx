@@ -288,8 +288,13 @@ const HeroSection = () => {
                 smooth={true}
                 duration={700}
                 className="primary-button"
+                spy={true}
+                offset={-80}
+                aria-label="View My Work"
               >
-                <FaCode className="button-icon" /> View My Work
+                <a href="#projects" style={{ display: "contents" }}>
+                  <FaCode className="button-icon" /> View My Work
+                </a>
               </Link>
             </motion.div>
 
