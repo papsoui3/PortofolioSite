@@ -257,7 +257,7 @@ const HeroSection = () => {
           }}
           className="hero-text"
         >
-          <motion.h1 className="hero-title">
+         <motion.h1 className="hero-title" aria-label="Alexandros Papageorgiou Portfolio">
             Hi, I'm{" "}
             <span className="gradient-text">
               {typedText}
