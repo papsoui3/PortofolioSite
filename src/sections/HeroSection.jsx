@@ -290,17 +290,15 @@ const HeroSection = () => {
                 spy={true}
                 offset={-80}
                 aria-label="View My Work"
+                style={{
+                  color: "inherit", // ensures no blue color
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.8rem",
+                }}
               >
-                <a
-                  href="#projects"
-                  style={{
-                    display: "contents",
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
-                >
-                  <FaCode className="button-icon" /> View My Work
-                </a>
+                <FaCode className="button-icon" /> View My Work
               </Link>
             </motion.div>
           </div>
