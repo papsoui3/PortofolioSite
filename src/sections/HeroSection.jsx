@@ -25,12 +25,7 @@ const HeroSection = () => {
   const animationTimeoutRef = useRef(null);
 
   const roles = useMemo(
-    () => [
-      "Alexandros Papageorgiou",
-      "Full Stack Developer",
-      "Software Engineer",
-      "Web Developer",
-    ],
+    () => ["Full Stack Developer", "Software Engineer", "Web Developer"],
     [],
   );
 
@@ -257,8 +252,12 @@ const HeroSection = () => {
           }}
           className="hero-text"
         >
-         <motion.h1 className="hero-title" aria-label="Alexandros Papageorgiou Portfolio">
-            Hi, I'm{" "}
+          <h1>Alexandros Papageorgiou Portfolio</h1>
+          <motion.h1
+            className="hero-title"
+            aria-label="Alexandros Papageorgiou Portfolio"
+          >
+            Hi, I'm a{" "}
             <span className="gradient-text">
               {typedText}
               <span className="blinking-cursor"></span>
@@ -292,68 +291,23 @@ const HeroSection = () => {
                 offset={-80}
                 aria-label="View My Work"
               >
-                <a href="#projects" style={{ display: "contents" }}>
+                <a
+                  href="#projects"
+                  style={{
+                    display: "contents",
+                    color: "inherit",
+                    textDecoration: "none",
+                  }}
+                >
                   <FaCode className="button-icon" /> View My Work
                 </a>
               </Link>
             </motion.div>
-
-            {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link
-                to="contact"
-                smooth={true}
-                duration={700}
-                className="hire-button"
-              >
-                <FaHandshake className="button-icon" /> Let's Collaborate
-              </Link>
-            </motion.div> */}
           </div>
 
-          {/* Social Links - Now properly spaced */}
-          <motion.div className="social-links-wrapper">
-            {/* <motion.div
-              className="social-links"
-            >
-              {[
-                { icon: <FaGithub />, url: 'https://github.com/HimanthaD4', label: 'GitHub', initialPos: { y: 50, x: -20 } },
-                { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/himantha-hirushan-390122212/', label: 'LinkedIn', initialPos: { y: 30, x: 20 } },
-                { icon: <FaFacebook />, url: 'https://web.facebook.com/Alex', label: 'Facebook', initialPos: { y: 40, x: -10 } },
-                { icon: <FaWhatsapp />, url: 'https://wa.me/94768840107', label: 'WhatsApp', initialPos: { y: 60, x: 10 } }
-              ].map((social, index) => (
-                <motion.a
-                  key={index}
-                  custom={index}
-                  initial={{ opacity: 0, y: social.initialPos.y, x: social.initialPos.x }}
-                  animate={socialControls}
-                  href={social.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="social-icon"
-                  whileHover={{ 
-                    color: '#f97316',
-                    backgroundColor: '#1e293b',
-                    borderColor: '#1e293b',
-                    y: -5,
-                    scale: 1.1,
-                  }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </motion.div> */}
-          </motion.div>
+          <motion.div className="social-links-wrapper"></motion.div>
         </motion.div>
 
-        {/* Image Container with Tech Icons */}
         <motion.div className="hero-image-container">
           <motion.div
             className="image-wrapper"
@@ -412,44 +366,6 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
       </motion.div>
-
-      {/* Scroll Indicator */}
-      {/* <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="scroll-indicator"
-      >
-        <Link
-          to="projects"
-          smooth={true}
-          duration={400}
-          className="scroll-link"
-          aria-label="Scroll down"
-        >
-          <motion.div
-            animate={{
-              y: [0, 8, 0],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          >
-            {/* <FaChevronDown /> 
-          </motion.div>
-          {/* <motion.span
-            className="scroll-text"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8 }}
-          >
-            Explore My Work
-          </motion.span> 
-        </Link>
-      </motion.div> */}
 
       <style jsx>{`
         .hero-section {
